@@ -11,6 +11,10 @@ inputs:
     description: "The Java version to use when setting up Java."
     required: false
     default: 11
+  excluded-modules:
+    description: "The submodules to exclude from the release."
+    required: false
+    default: ""
 
 # Jobs that will execute
 runs:
@@ -67,6 +71,7 @@ runs:
       env:
         MAVEN_VARS: ${{ steps.maven.outputs.VARIABLES }}
         GRADLE_VARS: ${{ steps.gradle.outputs.VARIABLES }}
+        EXCLUDED_MODULES: ${{ inputs.excluded-modules }}
       run: |-
         VARS=$MAVEN_VARS
         test "$VARS" == "" && VARS=$GRADLE_VARS
