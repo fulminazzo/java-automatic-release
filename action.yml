@@ -12,7 +12,7 @@ inputs:
     required: false
     default: 11
   excluded-modules:
-    description: "The submodules to exclude from the release."
+    description: "The submodules to exclude from the release, separated by spaces. Type MAIN to exclude the main module"
     required: false
     default: ""
 
