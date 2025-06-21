@@ -28,7 +28,7 @@ else
 fi
 
 files="$OUTPUT_DIR$REPOSITORY_NAME-$version.jar"
-if ! [ -f "$files" ]; then
+if ! [ -f "$files" ] || [[ $EXCLUDED_MODULES =~ "MAIN" ]]; then
   files=""
 fi
 
