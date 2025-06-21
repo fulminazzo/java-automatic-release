@@ -34,7 +34,7 @@ fi
 
 for sub in $subprojects; do
   file="$sub/$OUTPUT_DIR"
-  if [ -d "$file" ]; then
+  if [ -d "$file" ] && ! [[ $EXCLUDED_MODULES =~ $sub ]]; then
     # Prevents getting version from wildcard
     # shellcheck disable=SC2086
     files="$files $(ls $file*-$version.jar | grep -v -- -original.jar)"
