@@ -39,7 +39,7 @@ jobs:
     if: "startsWith(github.event.head_commit.message, '!release')"
     steps:
       - name: Automatic Release
-        uses: Fulminazzo/java-automatic-release@v4
+        uses: Fulminazzo/java-automatic-release@v5
         with:
           java-version: 8
         env:
