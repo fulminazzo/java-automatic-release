@@ -7,7 +7,8 @@ It does so by:
 - setting up Java to the specified version in `with.java-version`;
 - find out what build tool you are using:
   - if you are using **Maven**, it loads the project variables (_version_ and _modules_) from your `pom.xml` file and builds it using `mvn package`;
-  - if you are using **Gradle**, it loads the project variables from both your `build.gradle` and `settings.gradle` files and builds it using `./gradlew build`;
+  - if you are using **Gradle** with Gradle as DSL, it loads the project variables from both your `build.gradle` and `settings.gradle` files and builds it using `./gradlew build`;
+  - if you are using **Gradle** with Kotlin as DSL, it loads the project variables from both your `build.gradle.kts` and `settings.gradle.kts` files and builds it using `./gradlew build`;
   - if you are using **none of the above**, the action fails (**Apache Ant is NOT supported**).
 - finally,
   it uses the previous loaded variables to create a new release with tag

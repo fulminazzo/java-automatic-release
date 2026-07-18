@@ -65,6 +65,22 @@ runs:
         fi
         echo VARIABLES="$BUILD_DIR.gradle settings.gradle include $BUILD_DIR/libs/ (?<=version\s=\s(\"|'))([0-9.]+(-SNAPSHOT)?) (?<=include\s(\"|'))([^\"']+)" >> $GITHUB_OUTPUT
       shell: bash
+    # Build using Gradle with Kotlin DSL
+    - name: Setup Gradle with Kotlin DSL
+      uses: gradle/gradle-build-action@v2
+      if: ${{ steps.getbuildtool.outputs.BUILD_TOOL == 'GRADLE_KTS' }}
+    - name: Build Gradle with Kotlin DSL
+      id: gradle
+      if: ${{ steps.getbuildtool.outputs.BUILD_TOOL == 'GRADLE_KTS' }}
+      run: |-
+        chmod +x gradlew
+        ./gradlew build
+        BUILD_DIR="build"
+        if [ ! -f "$BUILD_DIR" ] && [ -f "app/build.gradle.kts" ]; then
+          BUILD_DIR="app/build"
+        fi
+        echo VARIABLES="$BUILD_DIR.gradle.kts settings.gradle.kts include $BUILD_DIR/libs/ (?<=version\s=\s(\"|'))([0-9.]+(-SNAPSHOT)?) (?<=include\s(\"|'))([^\"']+)" >> $GITHUB_OUTPUT
+      shell: bash
     # Obtain the Project version and modules
     - name: Gather Project Info
       id: gatherinfo
