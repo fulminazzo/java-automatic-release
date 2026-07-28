@@ -87,10 +87,12 @@ runs:
       env:
         MAVEN_VARS: ${{ steps.maven.outputs.VARIABLES }}
         GRADLE_VARS: ${{ steps.gradle.outputs.VARIABLES }}
+        GRADLE_KTS_VARS: ${{ steps.gradle_kts.outputs.VARIABLES }}
         EXCLUDED_MODULES: ${{ inputs.excluded-modules }}
       run: |-
         VARS=$MAVEN_VARS
         test "$VARS" == "" && VARS=$GRADLE_VARS
+        test "$VARS" == "" && VARS=$GRADLE_KTS_VARS
         VARS=($VARS)
         export BUILD_FILE="${VARS[0]}"
         export MODULES_FILE="${VARS[1]}"
